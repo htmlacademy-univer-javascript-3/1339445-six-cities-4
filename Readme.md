@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Alexandr Shilonosov](https://up.htmlacademy.ru/univer-js3/4/user/1339445).
-* Наставник: `Неизвестно`.
+* Студент: [Alexander Shilonosov](https://up.htmlacademy.ru/univer-js3/4/user/1339445).
+* Наставник: `Александр Сударев`.
 
 ---
 

@@ -1,4 +1,4 @@
-export default function FavoritesScreen() {
+export function FavoritesScreen() {
   return (
     <div className="page">
       <header className="header">

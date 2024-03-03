@@ -1,4 +1,4 @@
-export default function PlaceCard() {
+export function PlaceCard() {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">

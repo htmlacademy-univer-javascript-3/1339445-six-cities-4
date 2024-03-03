@@ -1,8 +1,8 @@
-import MainScreen from '../../pages/main-screen/MainScreen';
+import { MainScreen } from './pages/main-screen/MainScreen';
 
 const placeCardNumber = 5;
 
-export default function App() {
+export function App() {
   return (
     <MainScreen placeCardNumber={placeCardNumber}/>
   );

@@ -1,6 +1,6 @@
-import PlaceCard from '../../components/place-card/PlaceCard';
+import { PlaceCard } from '../../components/place-card/PlaceCard';
 
-export default function MainScreen({placeCardNumber}: MainScreenProps) {
+export function MainScreen({placeCardNumber}: MainScreenProps) {
   return (
     <div className="page page--gray page--main">
       <header className="header">

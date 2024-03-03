@@ -1,4 +1,4 @@
-export default function OfferScreen() {
+export function OfferScreen() {
   return (
     <div className="page">
       <header className="header">

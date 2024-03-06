@@ -6,8 +6,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const placeCardNumber = 5;
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App placeCardNumber={placeCardNumber}/>
   </React.StrictMode>
 );

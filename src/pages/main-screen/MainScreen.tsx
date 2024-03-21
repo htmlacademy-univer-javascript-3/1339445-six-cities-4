@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { PlaceCard } from '../../components/place-card/PlaceCard';
 import { AppRoute } from '../../const';
+import { Offer } from '../../types/offer';
+import { CitiesCardList } from '../../components/cards/cities-card-list/CitiesCardList';
 
-export function MainScreen({placeCardNumber}: MainScreenProps) {
+export function MainScreen({offers}: MainScreenProps) {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -112,9 +113,7 @@ export function MainScreen({placeCardNumber}: MainScreenProps) {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                { Array(placeCardNumber).fill(<PlaceCard />) }
-              </div>
+              < CitiesCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
@@ -127,5 +126,5 @@ export function MainScreen({placeCardNumber}: MainScreenProps) {
 }
 
 type MainScreenProps = {
-  placeCardNumber: number;
+  offers: Offer[];
 }

@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
+import { offers, offersByCityList } from './mocks/offers';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const placeCardNumber = 5;
-
 root.render(
   <React.StrictMode>
-    <App placeCardNumber={placeCardNumber}/>
+    <App offers={offers} offersByCityList={offersByCityList}/>
   </React.StrictMode>
 );

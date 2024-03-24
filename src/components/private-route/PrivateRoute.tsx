@@ -1,8 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../../const';
 
-export function PrivateRoute(props: PrivateRouteProps) {
-  const {authStatus, children} = props;
+export function PrivateRoute({authStatus, children}: PrivateRouteProps) {
 
   return authStatus === AuthStatus.auth ?
     children :

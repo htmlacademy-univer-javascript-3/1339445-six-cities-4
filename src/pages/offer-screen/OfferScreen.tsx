@@ -1,11 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
 import { offers } from '../../mocks/offers';
 import { Page404NotFound } from '../page-404-not-found/Page404NotFound';
 import { NearPlacesCardList } from '../../components/cards/near-places-card-list/NearPlacesCardList';
 import { ReviewsForm } from '../../components/reviews-form/ReviewsForm';
 
-export function OfferScreen() {
+export function OfferScreen({authStatus} : OfferScreenProps) {
   const params = useParams();
 
   const offerOrUndefined = offers.find((o) => String(o.id) === params.id);
@@ -205,7 +205,11 @@ export function OfferScreen() {
                   Reviews · <span className="reviews__amount">{offer.reviews.length}</span>
                 </h2>
                 {listReviews()}
-                <ReviewsForm />
+                {
+                  authStatus === AuthStatus.auth && (
+                    <ReviewsForm />
+                  )
+                }
               </section>
             </div>
           </div>
@@ -222,4 +226,8 @@ export function OfferScreen() {
       </main>
     </div>
   );
+}
+
+type OfferScreenProps = {
+  authStatus: AuthStatus;
 }

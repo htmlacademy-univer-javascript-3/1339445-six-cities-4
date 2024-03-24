@@ -1,11 +1,35 @@
-import { Fragment, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 import { starsData } from './const';
 
 export function ReviewsForm() {
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     rating: -1,
     review: '',
   });
+
+  function handleFieldChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    if (e.target === null) {
+      return;
+    }
+    const {name, value} = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
+
+  function isFormValid(): boolean {
+    if (formData.rating === -1) {
+      // 'Fill the stars'
+      return false;
+    }
+    if (formData.review.length < 50 || formData.review.length > 300) {
+      // 'Your review must contain from 50 to 300 caracters'
+      return false;
+    }
+    console.log(formData);
+    return true;
+  }
 
   function drawStars() {
     return starsData.map((item) => (
@@ -16,11 +40,8 @@ export function ReviewsForm() {
           defaultValue={item.value}
           id={`${item.value}-stars`}
           type="radio"
-          onChange={() => setForm({
-            ...form,
-            rating: item.value,
-          })}
-          checked={form.rating === item.value}
+          onChange={handleFieldChange}
+          checked={formData.rating === item.value}
         />
         <label
           htmlFor={`${item.value}-stars`}
@@ -48,11 +69,8 @@ export function ReviewsForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={form.review}
-        onChange={(e) => setForm({
-          ...form,
-          review: e.target.value,
-        })}
+        value={formData.review}
+        onChange={handleFieldChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -64,7 +82,7 @@ export function ReviewsForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={!isFormValid()}
         >
           Submit
         </button>

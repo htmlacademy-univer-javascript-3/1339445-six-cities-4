@@ -21,7 +21,7 @@ export function App({offers, offersByCityList}: AppProps) {
             </PrivateRoute>
           }
           />
-          <Route path={AppRoute.offerItem} element={<OfferScreen />} />
+          <Route path={AppRoute.offerItem} element={<OfferScreen authStatus={AuthStatus.auth} />} />
         </Route>
         <Route path='*' element={<Page404NotFound />} />
       </Routes>

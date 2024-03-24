@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Offer, OffersByCity } from '../../../types/offer';
-import { FavoritesCard } from '../favorites-card/FavoritesCard';
 import { useState } from 'react';
+import { OfferCard } from '../offer-card/OfferCard';
+import { CardType } from '../offer-card/const';
 
 export function FavoritesCardList({offersByCityList}: FavoritesCardListProps) {
   const [activeOfferId, setActiveOfferId] = useState(null);
@@ -22,11 +23,12 @@ export function FavoritesCardList({offersByCityList}: FavoritesCardListProps) {
         <div className="favorites__places">
           {
             offers.map((offer) => (
-              <FavoritesCard
+              <OfferCard
                 offer={offer}
                 key={offer.id}
                 activeOfferId={activeOfferId}
                 setActiveOfferId={setActiveOfferId}
+                cardType={CardType.favorites}
               />
             ))
           }

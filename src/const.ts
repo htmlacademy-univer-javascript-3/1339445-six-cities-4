@@ -10,3 +10,8 @@ export enum AuthStatus {
   noAuth = 'noAuth',
   unknown = 'unknown',
 }
+
+export enum OfferType {
+  apartment = 'Apartment',
+  room = 'Room',
+}

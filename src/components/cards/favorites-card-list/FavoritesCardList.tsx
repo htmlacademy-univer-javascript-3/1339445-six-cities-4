@@ -5,7 +5,7 @@ import { OfferCard } from '../offer-card/OfferCard';
 import { CardType } from '../offer-card/const';
 
 export function FavoritesCardList({offersByCityList}: FavoritesCardListProps) {
-  const [activeOfferId, setActiveOfferId] = useState(null);
+  const [activeOfferId, setActiveOfferId] = useState<Offer['id'] | null>(null);
 
   function locationItems(city: string, offers: Offer[]) {
     if (offers.length === 0) {

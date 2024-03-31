@@ -2,8 +2,21 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
 import { CitiesCardList } from '../../components/cards/cities-card-list/CitiesCardList';
+import { Map } from '../../components/map/Map';
+import { CITY } from '../../mocks/city';
+import { getMarkersFromOffers } from '../../utils';
+import { useState } from 'react';
 
 export function MainScreen({offers}: MainScreenProps) {
+  const [activeOfferId, setActiveOfferId] = useState<Offer['id'] | null>(null);
+
+  const activeOffer = offers.find(
+    (offer) => offer.id === activeOfferId
+  );
+  const selectedMarker = (activeOffer !== undefined) ?
+    getMarkersFromOffers([activeOffer])[0] :
+    null;
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -113,10 +126,12 @@ export function MainScreen({offers}: MainScreenProps) {
                   </li>
                 </ul>
               </form>
-              < CitiesCardList offers={offers}/>
+              < CitiesCardList offers={offers} activeOfferId={activeOfferId} setActiveOfferId={setActiveOfferId}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <section className="cities__map map">
+                <Map city={CITY} markers={getMarkersFromOffers(offers)} selectedMarker={selectedMarker} />
+              </section>
             </div>
           </div>
         </div>

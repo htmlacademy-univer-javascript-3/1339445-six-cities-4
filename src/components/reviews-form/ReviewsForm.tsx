@@ -27,7 +27,6 @@ export function ReviewsForm() {
       // 'Your review must contain from 50 to 300 caracters'
       return false;
     }
-    console.log(formData);
     return true;
   }
 

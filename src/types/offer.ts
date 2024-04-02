@@ -1,4 +1,5 @@
 import { OfferType } from '../const';
+import { Point } from './map';
 
 export type User = {
   username: string;
@@ -24,6 +25,7 @@ export type Offer = {
   whatsInside: string[];
   reviews: Review[];
   bookmark: boolean;
+  point: Point;
 }
 
 export type OffersByCity = {

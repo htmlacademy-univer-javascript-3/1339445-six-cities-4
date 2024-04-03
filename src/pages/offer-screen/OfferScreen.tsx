@@ -3,7 +3,11 @@ import { AppRoute, AuthStatus } from '../../const';
 import { offers } from '../../mocks/offers';
 import { Page404NotFound } from '../page-404-not-found/Page404NotFound';
 import { NearPlacesCardList } from '../../components/cards/near-places-card-list/NearPlacesCardList';
-import { ReviewsForm } from '../../components/reviews-form/ReviewsForm';
+import { ReviewsList } from '../../components/reviews/reviews-list/ReviewsList';
+import { reviews } from '../../mocks/reviews';
+import { Map } from '../../components/map/Map';
+import { CITY } from '../../mocks/city';
+import { getMarkersFromOffers } from '../../utils';
 
 export function OfferScreen({authStatus} : OfferScreenProps) {
   const params = useParams();
@@ -13,6 +17,8 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
     return <Page404NotFound/>;
   }
   const offer = offerOrUndefined;
+
+  const offersNear = offers.filter((o) => o.id !== offer.id);
 
   function listOfferGallery() {
     return (
@@ -32,51 +38,12 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
     );
   }
 
-  function listWhatsInside() {
+  function listGoods() {
     return (
       <ul className="offer__inside-list">
         {
-          offer.whatsInside.map((item) => (
+          offer.goods.map((item) => (
             <li className="offer__inside-item" key={item}>{item}</li>
-          ))
-        }
-      </ul>
-    );
-  }
-
-  function listReviews() {
-    return (
-      <ul className="reviews__list">
-        {
-          offer.reviews.map((review, index) => (
-            <li className="reviews__item" key={review.user.username + String(index)}>
-              <div className="reviews__user user">
-                <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                  <img
-                    className="reviews__avatar user__avatar"
-                    src={review.user.image}
-                    width={54}
-                    height={54}
-                    alt="Reviews avatar"
-                  />
-                </div>
-                <span className="reviews__user-name">{review.user.username}</span>
-              </div>
-              <div className="reviews__info">
-                <div className="reviews__rating rating">
-                  <div className="reviews__stars rating__stars">
-                    <span style={{ width: `${review.rating / 5 * 100}%` }} />
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
-                <p className="reviews__text">
-                  {review.text}
-                </p>
-                <time className="reviews__time" dateTime="2019-04-24">
-                  {review.date}
-                </time>
-              </div>
-            </li>
           ))
         }
       </ul>
@@ -139,7 +106,7 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
               }
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {offer.name}
+                  {offer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width={31} height={33}>
@@ -170,7 +137,7 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
-                {listWhatsInside()}
+                {listGoods()}
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
@@ -200,27 +167,19 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
                   </p>
                 </div>
               </div>
-              <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">{offer.reviews.length}</span>
-                </h2>
-                {listReviews()}
-                {
-                  authStatus === AuthStatus.auth && (
-                    <ReviewsForm />
-                  )
-                }
-              </section>
+              <ReviewsList reviews={reviews} authStatus={authStatus}/>
             </div>
           </div>
-          <section className="offer__map map" />
+          <section className="offer__map map">
+            <Map city={CITY} markers={getMarkersFromOffers(offersNear)} selectedMarker={null}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">
               Other places in the neighbourhood
             </h2>
-            <NearPlacesCardList offers={offers.filter((o) => o.id !== offer.id)}/>
+            <NearPlacesCardList offers={offersNear}/>
           </section>
         </div>
       </main>

@@ -3,8 +3,8 @@ import { Offer, OffersByCity } from '../types/offer';
 
 export const offers: Offer[] = [
   {
-    id: 1,
-    name: 'Beautiful & luxurious apartment at great location',
+    id: 'offer-uuid-1',
+    title: 'Beautiful & luxurious apartment at great location',
     type: OfferType.apartment,
     isPremium: true,
     rating: 4.8,
@@ -17,7 +17,7 @@ export const offers: Offer[] = [
       'img/apartment-01.jpg',
       'img/studio-01.jpg',
     ],
-    whatsInside: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -29,17 +29,6 @@ export const offers: Offer[] = [
       'Cabel TV',
       'Fridge',
     ],
-    reviews: [
-      {
-        date: 'April 2019',
-        text: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-        rating: 4,
-        user: {
-          username: 'Max',
-          image: 'img/avatar-max.jpg',
-        }
-      },
-    ],
     bookmark: true,
     point: {
       lat: 52.3909553943508,
@@ -48,8 +37,8 @@ export const offers: Offer[] = [
   },
 
   {
-    id: 2,
-    name: 'Wood and stone place',
+    id: 'offer-uuid-2',
+    title: 'Wood and stone place',
     type: OfferType.room,
     isPremium: false,
     rating: 4.7,
@@ -63,24 +52,13 @@ export const offers: Offer[] = [
       'img/apartment-01.jpg',
       'img/studio-01.jpg',
     ],
-    whatsInside: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
       'Kitchen',
       'Cabel TV',
       'Fridge',
-    ],
-    reviews: [
-      {
-        date: 'April 2019',
-        text: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-        rating: 4,
-        user: {
-          username: 'Max',
-          image: 'img/avatar-max.jpg',
-        }
-      },
     ],
     bookmark: false,
     point: {
@@ -90,8 +68,8 @@ export const offers: Offer[] = [
   },
 
   {
-    id: 3,
-    name: 'Canal View Prinsengracht',
+    id: 'offer-uuid-3',
+    title: 'Canal View Prinsengracht',
     type: OfferType.apartment,
     isPremium: false,
     rating: 4.5,
@@ -102,7 +80,7 @@ export const offers: Offer[] = [
       'img/apartment-03.jpg',
       'img/apartment-01.jpg',
     ],
-    whatsInside: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -113,17 +91,6 @@ export const offers: Offer[] = [
       'Cabel TV',
       'Fridge',
     ],
-    reviews: [
-      {
-        date: 'April 2019',
-        text: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-        rating: 4,
-        user: {
-          username: 'Max',
-          image: 'img/avatar-max.jpg',
-        }
-      },
-    ],
     bookmark: true,
     point: {
       lat: 52.3909553943508,
@@ -132,8 +99,8 @@ export const offers: Offer[] = [
   },
 
   {
-    id: 4,
-    name: 'Nice, cozy, warm big bed apartment',
+    id: 'offer-uuid-4',
+    title: 'Nice, cozy, warm big bed apartment',
     type: OfferType.apartment,
     isPremium: true,
     rating: 4.9,
@@ -144,7 +111,7 @@ export const offers: Offer[] = [
       'img/studio-01.jpg',
       'img/apartment-01.jpg',
     ],
-    whatsInside: [
+    goods: [
       'Wi-Fi',
       'Washing machine',
       'Towels',
@@ -155,17 +122,6 @@ export const offers: Offer[] = [
       'Dishwasher',
       'Cabel TV',
       'Fridge',
-    ],
-    reviews: [
-      {
-        date: 'April 2019',
-        text: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-        rating: 4,
-        user: {
-          username: 'Max',
-          image: 'img/avatar-max.jpg',
-        }
-      },
     ],
     bookmark: false,
     point: {

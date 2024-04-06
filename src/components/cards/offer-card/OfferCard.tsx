@@ -63,7 +63,7 @@ export function OfferCard({offer, setActiveOfferId, cardType}: OfferCardProps) {
         </div>
         <h2 className="place-card__name">
           <Link to={getOfferLink(offer.id)}>
-            {offer.name}
+            {offer.title}
           </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>

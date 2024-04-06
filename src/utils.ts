@@ -3,7 +3,7 @@ import { Offer } from './types/offer';
 
 export function getMarkerFromOffer(offer: Offer): Marker {
   return {
-    title: offer.name,
+    title: offer.title,
     point: offer.point,
   };
 }

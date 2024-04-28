@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Offer, OffersByCity } from '../../../types/offer';
-import { useState } from 'react';
+import { Offer } from '../../../types/offer';
 import { OfferCard } from '../offer-card/OfferCard';
 import { CardType } from '../offer-card/const';
+import { offersByCityList } from '../../../mocks/offers';
 
-export function FavoritesCardList({offersByCityList}: FavoritesCardListProps) {
-  const [activeOfferId, setActiveOfferId] = useState<Offer['id'] | null>(null);
+export function FavoritesCardList() {
 
   function locationItems(city: string, offers: Offer[]) {
     if (offers.length === 0) {
@@ -24,10 +23,8 @@ export function FavoritesCardList({offersByCityList}: FavoritesCardListProps) {
           {
             offers.map((offer) => (
               <OfferCard
-                offer={offer}
                 key={offer.id}
-                activeOfferId={activeOfferId}
-                setActiveOfferId={setActiveOfferId}
+                offer={offer}
                 cardType={CardType.favorites}
               />
             ))
@@ -42,8 +39,4 @@ export function FavoritesCardList({offersByCityList}: FavoritesCardListProps) {
       {offersByCityList.map(({city, offers}) => locationItems(city, offers))}
     </ul>
   );
-}
-
-type FavoritesCardListProps = {
-  offersByCityList: OffersByCity[];
 }

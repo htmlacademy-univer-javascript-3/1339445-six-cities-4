@@ -1,27 +1,20 @@
-import { useState } from 'react';
-import { Offer } from '../../../types/offer';
 import { OfferCard } from '../offer-card/OfferCard';
 import { CardType } from '../offer-card/const';
 import { getMarkersFromOffers } from '../../../utils';
 import { Map } from '../../map/Map';
-import { CITY } from '../../../mocks/city';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 
-export function CitiesCardList({offers}: CitiesCardListProps) {
-  const [activeOfferId, setActiveOfferId] = useState<Offer['id'] | null>(null);
+export function CitiesCardList() {
+  const {city, offers, activeOffer} = useAppSelector((state) => state);
 
-  const activeOffer = offers.find(
-    (offer) => offer.id === activeOfferId
-  );
-  const selectedMarker = (activeOffer !== undefined) ?
-    getMarkersFromOffers([activeOffer])[0] :
-    null;
+  const selectedMarker = activeOffer ? getMarkersFromOffers([activeOffer])[0] : null;
 
   return (
     <div className="cities">
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">312 places to stay in Amsterdam</b>
+          <b className="places__found">{offers.length} places to stay in {city.title}</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <span className="places__sorting-type" tabIndex={0}>
@@ -52,10 +45,8 @@ export function CitiesCardList({offers}: CitiesCardListProps) {
             {
               offers.map((offer) => (
                 <OfferCard
-                  offer={offer}
                   key={offer.id}
-                  activeOfferId={activeOfferId}
-                  setActiveOfferId={setActiveOfferId}
+                  offer={offer}
                   cardType={CardType.cities}
                 />
               ))
@@ -64,14 +55,10 @@ export function CitiesCardList({offers}: CitiesCardListProps) {
         </section>
         <div className="cities__right-section">
           <section className="cities__map map">
-            <Map city={CITY} markers={getMarkersFromOffers(offers)} selectedMarker={selectedMarker} />
+            <Map city={city} markers={getMarkersFromOffers(offers)} selectedMarker={selectedMarker} />
           </section>
         </div>
       </div>
     </div>
   );
-}
-
-type CitiesCardListProps = {
-  offers: Offer[];
 }

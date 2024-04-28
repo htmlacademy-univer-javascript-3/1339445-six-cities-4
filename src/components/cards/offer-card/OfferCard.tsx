@@ -2,20 +2,19 @@ import { Link } from 'react-router-dom';
 import { Offer } from '../../../types/offer';
 import { CardType, cardParametersMap } from './const';
 import { getOfferLink } from './utils';
-import { Dispatch, SetStateAction } from 'react';
+import { useAppDispatch } from '../../../hooks/useAppSelector';
+import { changeActiveOffer } from '../../../store/action';
 
-export function OfferCard({offer, setActiveOfferId, cardType}: OfferCardProps) {
+export function OfferCard({offer, cardType}: OfferCardProps) {
+  const dispatch = useAppDispatch();
+
   const params = cardParametersMap[cardType];
 
   return (
     <article
       className={`${cardType}__card place-card`}
-      onMouseOver={() => {
-        setActiveOfferId?.(offer.id);
-      }}
-      onMouseOut={() => {
-        setActiveOfferId?.(null);
-      }}
+      onMouseOver={() => dispatch(changeActiveOffer({activeOffer: offer}))}
+      onMouseOut={() => dispatch(changeActiveOffer({activeOffer: null}))}
     >
       {
         params.drawPremium && offer.isPremium && (
@@ -74,9 +73,6 @@ export function OfferCard({offer, setActiveOfferId, cardType}: OfferCardProps) {
 
 type OfferCardProps = {
   offer: Offer;
-  // eslint-disable-next-line react/no-unused-prop-types
-  activeOfferId?: Offer['id'] | null;
-  setActiveOfferId?: Dispatch<SetStateAction<Offer['id'] | null>>;
   cardType: CardType;
 }
 

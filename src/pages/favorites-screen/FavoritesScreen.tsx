@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { OffersByCity } from '../../types/offer';
 import { FavoritesCardList } from '../../components/cards/favorites-card-list/FavoritesCardList';
 
-export function FavoritesScreen({offersByCityList}: FavoritesScreenProps) {
+export function FavoritesScreen() {
   return (
     <div className="page">
       <header className="header">
@@ -48,7 +47,7 @@ export function FavoritesScreen({offersByCityList}: FavoritesScreenProps) {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesCardList offersByCityList={offersByCityList}/>
+            <FavoritesCardList/>
           </section>
         </div>
       </main>
@@ -65,8 +64,4 @@ export function FavoritesScreen({offersByCityList}: FavoritesScreenProps) {
       </footer>
     </div>
   );
-}
-
-type FavoritesScreenProps = {
-  offersByCityList: OffersByCity[];
 }

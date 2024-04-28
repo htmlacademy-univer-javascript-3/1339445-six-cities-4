@@ -13,12 +13,14 @@ const initialState: State = {
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const {city, offers} = action.payload;
       state.city = city;
       state.offers = offers;
       state.activeOffer = null;
     })
     .addCase(changeOffers, (state, action) => {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const {offers} = action.payload;
       state.offers = offers;
       state.activeOffer = null;

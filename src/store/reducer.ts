@@ -1,12 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {changeActiveOffer, changeCity, changeOffers} from './action';
-import { CITY } from '../mocks/city';
-import { offers } from '../mocks/offers';
 import { State } from '../types/state';
+import { cities } from '../mocks/city';
+import { getOffersByCity } from '../utils';
+
+const DEFAULT_CITY = cities[0];
 
 const initialState: State = {
-  city: CITY,
-  offers: offers,
+  city: DEFAULT_CITY,
+  offers: getOffersByCity(DEFAULT_CITY),
   activeOffer: null,
 };
 

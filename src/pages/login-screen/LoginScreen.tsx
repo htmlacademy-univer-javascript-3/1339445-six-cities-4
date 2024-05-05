@@ -51,13 +51,13 @@ export function LoginScreen() {
               </button>
             </form>
           </section>
-          <section className="locations locations--login locations--current">
+          {/* <section className="locations locations--login locations--current">
             <div className="locations__item">
               <Link className="locations__item-link" to="#todo">
                 <span>Amsterdam</span>
               </Link>
             </div>
-          </section>
+          </section> */}
         </div>
       </main>
     </div>

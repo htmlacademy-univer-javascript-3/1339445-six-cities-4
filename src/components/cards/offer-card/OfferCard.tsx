@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../../types/offer';
+import { OfferPreview } from '../../../types/offer';
 import { CardType, cardParametersMap } from './const';
 import { getOfferLink } from './utils';
 import { useAppDispatch } from '../../../hooks/useAppSelector';
@@ -27,7 +27,7 @@ export function OfferCard({offer, cardType}: OfferCardProps) {
         <Link to={getOfferLink(offer.id)}>
           <img
             className="place-card__image"
-            src={offer.gallery[0]}
+            src={offer.previewImage}
             width={params.image.width}
             height={params.image.height}
             alt="Place image"
@@ -38,7 +38,7 @@ export function OfferCard({offer, cardType}: OfferCardProps) {
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
-            <span className="place-card__price-text">/&nbsp;{offer.pricePer}</span>
+            <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
             className="place-card__bookmark-button place-card__bookmark-button--active button"
@@ -49,7 +49,7 @@ export function OfferCard({offer, cardType}: OfferCardProps) {
               width={18}
               height={19}
             >
-              { offer.bookmark && <use xlinkHref="#icon-bookmark" /> }
+              { offer.isFavorite && <use xlinkHref="#icon-bookmark" /> }
             </svg>
             <span className="visually-hidden">To bookmarks</span>
           </button>
@@ -72,7 +72,7 @@ export function OfferCard({offer, cardType}: OfferCardProps) {
 }
 
 type OfferCardProps = {
-  offer: Offer;
+  offer: OfferPreview;
   cardType: CardType;
 }
 

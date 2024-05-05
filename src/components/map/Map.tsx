@@ -1,7 +1,7 @@
-import {useRef, useEffect} from 'react';
+import { useRef, useEffect } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {MapMarker} from './const';
+import { MapMarker } from './const';
 import useMap from '../../hooks/useMap';
 import { City, Marker } from '../../types/map';
 
@@ -23,9 +23,18 @@ export function Map({city, markers, selectedMarker}: MapProps) {
 
   useEffect(() => {
     if (map) {
+      map.eachLayer((layer) => {
+        if (layer instanceof leaflet.Marker) {
+          map.removeLayer(layer);
+        }
+      });
+
       markers.forEach((marker) => {
         leaflet.marker(
-          marker.point,
+          {
+            lng: marker.location.longitude,
+            lat: marker.location.latitude,
+          },
           {
             icon: (marker.title === selectedMarker?.title) ?
               activeCustomIcon :

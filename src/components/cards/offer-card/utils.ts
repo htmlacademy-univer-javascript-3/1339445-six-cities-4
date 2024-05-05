@@ -1,6 +1,6 @@
 import { AppRoute } from '../../../const';
-import { Offer } from '../../../types/offer';
+import { OfferBase } from '../../../types/offer';
 
-export function getOfferLink(offerId: Offer['id']) {
+export function getOfferLink(offerId: OfferBase['id']) {
   return AppRoute.offerItem.replace(':id', String(offerId));
 }

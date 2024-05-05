@@ -1,15 +1,15 @@
-export type Point = {
-  lat: number;
-  lng: number;
-}
-
-export type Marker = {
-  title: string;
-  point: Point;
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
 }
 
 export type City = {
   title: string;
-  point: Point;
-  zoom: number;
+  location: Location;
+}
+
+export type Marker = {
+  title: string;
+  location: Location;
 }

@@ -9,9 +9,10 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City) {
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
+      const location = city.location;
       const instance = new Map(mapRef.current, {
-        center: city.point,
-        zoom: city.zoom,
+        center: {lat: location.latitude, lng: location.longitude},
+        zoom: location.zoom,
       });
 
       const layer = new TileLayer(

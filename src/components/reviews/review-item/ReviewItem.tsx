@@ -8,7 +8,7 @@ export function ReviewItem({review}: ReviewItemProps) {
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img
             className="reviews__avatar user__avatar"
-            src={review.user.image}
+            src={review.user.avatarUrl}
             width={54}
             height={54}
             alt="Reviews avatar"

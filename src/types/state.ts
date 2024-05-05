@@ -1,11 +1,11 @@
 import {store} from '../store/index.js';
 import { City } from './map.js';
-import { Offer } from './offer.js';
+import { OfferPreview } from './offer.js';
 
 export type State = {
   city: City;
-  offers: Offer[];
-  activeOffer: Offer | null;
+  offers: OfferPreview[];
+  activeOffer: OfferPreview | null;
 }
 
 export type AppDispatch = typeof store.dispatch;

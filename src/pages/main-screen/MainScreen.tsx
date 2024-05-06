@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Offer } from '../../types/offer';
 import { CitiesCardList } from '../../components/cards/cities-card-list/CitiesCardList';
+import { LocationRows } from '../../components/locations-row/LocationsRow';
 
-export function MainScreen({offers}: MainScreenProps) {
+export function MainScreen() {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -47,47 +47,10 @@ export function MainScreen({offers}: MainScreenProps) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to="#todo">
-                  <span>Paris</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to="#todo">
-                  <span>Cologne</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to="#todo">
-                  <span>Brussels</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item tabs__item--active" to="#todo">
-                  <span>Amsterdam</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to="#todo">
-                  <span>Hamburg</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to="#todo">
-                  <span>Dusseldorf</span>
-                </Link>
-              </li>
-            </ul>
-          </section>
+          <LocationRows/>
         </div>
-        <CitiesCardList offers={offers}/>
+        <CitiesCardList/>
       </main>
     </div>
   );
-}
-
-type MainScreenProps = {
-  offers: Offer[];
 }

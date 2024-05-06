@@ -1,10 +1,12 @@
 import { City } from '../types/map';
 
-export const CITY: City = {
-  title: 'Amsterdam',
-  point: {
-    lat: 52.38,
-    lng: 4.90,
+const cityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export const cities: City[] = cityNames.map((cityName) => ({
+  title: cityName,
+  location: {
+    latitude: 52.38,
+    longitude: 4.90,
+    zoom: 11,
   },
-  zoom: 11,
-};
+}));

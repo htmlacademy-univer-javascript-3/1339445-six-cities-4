@@ -1,22 +1,38 @@
 import { OfferType } from '../const';
-import { Offer, OffersByCity } from '../types/offer';
+import { OfferFull, OfferPreview } from '../types/offer';
+import { User } from '../types/user';
 
-export const offers: Offer[] = [
+const host: User = {
+  name: 'Angelina',
+  avatarUrl: 'img/avatar-angelina.jpg',
+  isPro: true,
+};
+
+export const offerFullList: OfferFull[] = [
+  // Amsterdam
   {
     id: 'offer-uuid-1',
     title: 'Beautiful & luxurious apartment at great location',
     type: OfferType.apartment,
+    price: 120,
+    city: {
+      title: 'Amsterdam',
+      location: {
+        latitude: 52.38,
+        longitude: 4.90,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: true,
     isPremium: true,
     rating: 4.8,
-    price: 120,
-    pricePer: 'night',
-    gallery: [
-      'img/apartment-01.jpg',
-      'img/apartment-02.jpg',
-      'img/apartment-03.jpg',
-      'img/apartment-01.jpg',
-      'img/studio-01.jpg',
-    ],
+    description: 'Some useful description 1',
+    bedrooms: 1,
     goods: [
       'Wi-Fi',
       'Washing machine',
@@ -29,22 +45,50 @@ export const offers: Offer[] = [
       'Cabel TV',
       'Fridge',
     ],
-    bookmark: true,
-    point: {
-      lat: 52.3909553943508,
-      lng: 4.85309666406198,
-    },
+    host: host,
+    images: [
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-01.jpg',
+      'img/studio-01.jpg',
+    ],
+    maxAdults: 4,
   },
 
   {
     id: 'offer-uuid-2',
     title: 'Wood and stone place',
     type: OfferType.room,
+    price: 80,
+    city: {
+      title: 'Amsterdam',
+      location: {
+        latitude: 52.38,
+        longitude: 4.90,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
     isPremium: false,
     rating: 4.7,
-    price: 80,
-    pricePer: 'night',
-    gallery: [
+    description: 'Some useful description 2',
+    bedrooms: 2,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Kitchen',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: host,
+    images: [
       'img/room.jpg',
       'img/apartment-01.jpg',
       'img/apartment-02.jpg',
@@ -52,34 +96,32 @@ export const offers: Offer[] = [
       'img/apartment-01.jpg',
       'img/studio-01.jpg',
     ],
-    goods: [
-      'Wi-Fi',
-      'Washing machine',
-      'Towels',
-      'Kitchen',
-      'Cabel TV',
-      'Fridge',
-    ],
-    bookmark: false,
-    point: {
-      lat: 52.3609553943508,
-      lng: 4.85309666406198,
-    },
+    maxAdults: 3,
   },
 
   {
     id: 'offer-uuid-3',
     title: 'Canal View Prinsengracht',
     type: OfferType.apartment,
+    price: 132,
+    city: {
+      title: 'Amsterdam',
+      location: {
+        latitude: 52.38,
+        longitude: 4.90,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: true,
     isPremium: false,
     rating: 4.5,
-    price: 132,
-    pricePer: 'night',
-    gallery: [
-      'img/apartment-02.jpg',
-      'img/apartment-03.jpg',
-      'img/apartment-01.jpg',
-    ],
+    description: 'Some useful description 3',
+    bedrooms: 2,
     goods: [
       'Wi-Fi',
       'Washing machine',
@@ -91,26 +133,38 @@ export const offers: Offer[] = [
       'Cabel TV',
       'Fridge',
     ],
-    bookmark: true,
-    point: {
-      lat: 52.3909553943508,
-      lng: 4.929309666406198,
-    },
+    host: host,
+    images: [
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-01.jpg',
+    ],
+    maxAdults: 1,
   },
 
   {
     id: 'offer-uuid-4',
     title: 'Nice, cozy, warm big bed apartment',
     type: OfferType.apartment,
+    price: 180,
+    city: {
+      title: 'Amsterdam',
+      location: {
+        latitude: 52.38,
+        longitude: 4.90,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
     isPremium: true,
     rating: 4.9,
-    price: 180,
-    pricePer: 'night',
-    gallery: [
-      'img/apartment-03.jpg',
-      'img/studio-01.jpg',
-      'img/apartment-01.jpg',
-    ],
+    description: 'Some useful description 4',
+    bedrooms: 2,
     goods: [
       'Wi-Fi',
       'Washing machine',
@@ -123,21 +177,146 @@ export const offers: Offer[] = [
       'Cabel TV',
       'Fridge',
     ],
-    bookmark: false,
-    point: {
-      lat: 52.3809553943508,
-      lng: 4.939309666406198,
+    host: host,
+    images: [
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/apartment-01.jpg',
+    ],
+    maxAdults: 2,
+  },
+
+  // Paris
+  {
+    id: 'offer-uuid-5',
+    title: 'Wood and stone place',
+    type: OfferType.room,
+    price: 80,
+    city: {
+      title: 'Paris',
+      location: {
+        latitude: 52.38,
+        longitude: 4.90,
+        zoom: 11,
+      },
     },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4.7,
+    description: 'Some useful description 2',
+    bedrooms: 2,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Kitchen',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: host,
+    images: [
+      'img/room.jpg',
+      'img/apartment-01.jpg',
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-01.jpg',
+      'img/studio-01.jpg',
+    ],
+    maxAdults: 3,
+  },
+
+  {
+    id: 'offer-uuid-6',
+    title: 'Canal View Prinsengracht',
+    type: OfferType.apartment,
+    price: 132,
+    city: {
+      title: 'Paris',
+      location: {
+        latitude: 52.38,
+        longitude: 4.90,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 8,
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 4.5,
+    description: 'Some useful description 3',
+    bedrooms: 2,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: host,
+    images: [
+      'img/apartment-02.jpg',
+      'img/apartment-03.jpg',
+      'img/apartment-01.jpg',
+    ],
+    maxAdults: 1,
+  },
+
+  {
+    id: 'offer-uuid-7',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: OfferType.apartment,
+    price: 180,
+    city: {
+      title: 'Paris',
+      location: {
+        latitude: 52.38,
+        longitude: 4.90,
+        zoom: 11,
+      },
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 8,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4.9,
+    description: 'Some useful description 4',
+    bedrooms: 2,
+    goods: [
+      'Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge',
+    ],
+    host: host,
+    images: [
+      'img/apartment-03.jpg',
+      'img/studio-01.jpg',
+      'img/apartment-01.jpg',
+    ],
+    maxAdults: 2,
   },
 ];
 
-export const offersByCityList: OffersByCity[] = [
-  {
-    city: 'Amsterdam',
-    offers: offers.slice(0, 2),
-  },
-  {
-    city: 'Cologne',
-    offers: offers.slice(2),
-  },
-];
+
+export const offerPreviewList: OfferPreview[] = offerFullList.map((offerFull) => Object.assign({}, offerFull, {previewImage: offerFull.images[0]}));

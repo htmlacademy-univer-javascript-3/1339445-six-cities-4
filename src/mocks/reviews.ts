@@ -8,7 +8,7 @@ export const reviews: Review[] = [
     rating: 4,
     user: {
       name: 'Max',
-      image: 'img/avatar-max.jpg',
+      avatarUrl: 'img/avatar-max.jpg',
       isPro: false,
     }
   },
@@ -19,7 +19,7 @@ export const reviews: Review[] = [
     rating: 5,
     user: {
       name: 'Vax',
-      image: 'img/avatar-max.jpg',
+      avatarUrl: 'img/avatar-max.jpg',
       isPro: true,
     }
   },
@@ -30,7 +30,7 @@ export const reviews: Review[] = [
     rating: 3,
     user: {
       name: 'Fax',
-      image: 'img/avatar-max.jpg',
+      avatarUrl: 'img/avatar-max.jpg',
       isPro: false,
     }
   },

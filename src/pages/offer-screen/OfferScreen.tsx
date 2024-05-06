@@ -1,30 +1,33 @@
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../../const';
-import { offers } from '../../mocks/offers';
+import { offerFullList } from '../../mocks/offers';
 import { Page404NotFound } from '../page-404-not-found/Page404NotFound';
 import { NearPlacesCardList } from '../../components/cards/near-places-card-list/NearPlacesCardList';
 import { ReviewsList } from '../../components/reviews/reviews-list/ReviewsList';
 import { reviews } from '../../mocks/reviews';
 import { Map } from '../../components/map/Map';
-import { CITY } from '../../mocks/city';
-import { getMarkersFromOffers } from '../../utils';
+import { getMarkersFromOffers, getOffersByCity } from '../../utils';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 export function OfferScreen({authStatus} : OfferScreenProps) {
   const params = useParams();
+  const [city, activeOffer] = useAppSelector((state) => [state.city, state.activeOffer]);
 
-  const offerOrUndefined = offers.find((o) => String(o.id) === params.id);
+  const offerOrUndefined = offerFullList.find((o) => String(o.id) === params.id);
   if (offerOrUndefined === undefined) {
     return <Page404NotFound/>;
   }
   const offer = offerOrUndefined;
 
-  const offersNear = offers.filter((o) => o.id !== offer.id);
+  const offersNear = getOffersByCity(city).filter((o) => o.id !== offer.id);
+  const markers = getMarkersFromOffers(offersNear);
+  const selectedMarker = activeOffer ? getMarkersFromOffers([activeOffer])[0] : null;
 
   function listOfferGallery() {
     return (
       <div className="offer__gallery">
         {
-          offer.gallery.map((src, index) => (
+          offer.images.map((src, index) => (
             <div className="offer__image-wrapper" key={src + String(index)}>
               <img
                 className="offer__image"
@@ -110,7 +113,7 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width={31} height={33}>
-                    { offer.bookmark && <use xlinkHref="#icon-bookmark" /> }
+                    { offer.isFavorite && <use xlinkHref="#icon-bookmark" /> }
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
@@ -133,7 +136,7 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
               </ul>
               <div className="offer__price">
                 <b className="offer__price-value">€{offer.price}</b>
-                <span className="offer__price-text">&nbsp;{offer.pricePer}</span>
+                <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
@@ -171,7 +174,7 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
             </div>
           </div>
           <section className="offer__map map">
-            <Map city={CITY} markers={getMarkersFromOffers(offersNear)} selectedMarker={null}/>
+            <Map city={offer.city} markers={markers} selectedMarker={selectedMarker}/>
           </section>
         </section>
         <div className="container">

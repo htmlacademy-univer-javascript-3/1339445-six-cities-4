@@ -1,22 +1,29 @@
 import { OfferType } from '../const';
-import { Point } from './map';
+import { City, Location } from './map';
+import { User } from './user';
 
 
-export type Offer = {
+export type OfferBase = {
   id: string;
   title: string;
   type: OfferType;
+  price: number;
+  city: City;
+  location: Location;
+  isFavorite?: boolean;
   isPremium: boolean;
   rating: number;
-  price: number;
-  pricePer: string;
-  gallery: string[];
-  goods: string[];
-  bookmark: boolean;
-  point: Point;
 }
 
-export type OffersByCity = {
-  city: string;
-  offers: Offer[];
+export type OfferPreview = OfferBase & {
+  previewImage: string;
+}
+
+export type OfferFull = OfferBase & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: User;
+  images: string[];
+  maxAdults: number;
 }

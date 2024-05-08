@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { CitiesCardList } from '../../components/cards/cities-card-list/CitiesCardList';
 import { LocationRows } from '../../components/locations-row/LocationsRow';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 export function MainScreen() {
+  const offers = useAppSelector((state) => state.offers);
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -44,7 +47,7 @@ export function MainScreen() {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index${offers.length === 0 && ' page__main--index-empty'}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <LocationRows/>

@@ -13,8 +13,8 @@ export function OfferCard({offer, cardType}: OfferCardProps) {
   return (
     <article
       className={`${cardType}__card place-card`}
-      onMouseOver={() => dispatch(changeActiveOffer({activeOffer: offer}))}
-      onMouseOut={() => dispatch(changeActiveOffer({activeOffer: null}))}
+      onMouseOver={ () => dispatch(changeActiveOffer(offer)) }
+      onMouseOut={ () => dispatch(changeActiveOffer(null)) }
     >
       {
         params.drawPremium && offer.isPremium && (

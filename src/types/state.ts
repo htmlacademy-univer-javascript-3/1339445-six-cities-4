@@ -3,9 +3,10 @@ import { City } from './map.js';
 import { OfferPreview } from './offer.js';
 
 export type State = {
-  city: City;
+  cityName: City['name'];
   offers: OfferPreview[];
   activeOffer: OfferPreview | null;
+  isOffersLoading: boolean;
 }
 
 export type AppDispatch = typeof store.dispatch;

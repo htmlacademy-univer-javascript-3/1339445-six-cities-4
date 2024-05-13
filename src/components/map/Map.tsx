@@ -3,9 +3,10 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapMarker } from './const';
 import useMap from '../../hooks/useMap';
-import { City, Marker } from '../../types/map';
+import { City } from '../../types/map';
+import { OfferBase } from '../../types/offer';
 
-export function Map({city, markers, selectedMarker}: MapProps) {
+export function Map({city, offers, selectedOffer}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -23,27 +24,34 @@ export function Map({city, markers, selectedMarker}: MapProps) {
 
   useEffect(() => {
     if (map) {
+      map.setView(
+        {
+          lat: city.location.latitude,
+          lng: city.location.longitude,
+        },
+        city.location.zoom,
+      );
       map.eachLayer((layer) => {
         if (layer instanceof leaflet.Marker) {
           map.removeLayer(layer);
         }
       });
 
-      markers.forEach((marker) => {
+      offers.forEach((offer) => {
         leaflet.marker(
           {
-            lng: marker.location.longitude,
-            lat: marker.location.latitude,
+            lng: offer.location.longitude,
+            lat: offer.location.latitude,
           },
           {
-            icon: (marker.title === selectedMarker?.title) ?
+            icon: (offer.id === selectedOffer?.id) ?
               activeCustomIcon :
               defaultCustomIcon,
           }
         ).addTo(map);
       });
     }
-  }, [map, markers, selectedMarker, activeCustomIcon, defaultCustomIcon]);
+  }, [map, offers, selectedOffer, activeCustomIcon, defaultCustomIcon, city]);
 
 
   return (
@@ -57,6 +65,6 @@ export function Map({city, markers, selectedMarker}: MapProps) {
 
 type MapProps = {
   city: City;
-  markers: Marker[];
-  selectedMarker: Marker | null;
+  offers: OfferBase[];
+  selectedOffer: OfferBase | null;
 }

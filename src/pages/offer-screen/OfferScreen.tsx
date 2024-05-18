@@ -6,22 +6,21 @@ import { NearPlacesCardList } from '../../components/cards/near-places-card-list
 import { ReviewsList } from '../../components/reviews/reviews-list/ReviewsList';
 import { reviews } from '../../mocks/reviews';
 import { Map } from '../../components/map/Map';
-import { getMarkersFromOffers, getOffersByCity } from '../../utils';
+import { getOffersByCityName } from '../../utils';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { OfferBase } from '../../types/offer';
 
 export function OfferScreen({authStatus} : OfferScreenProps) {
   const params = useParams();
-  const [city, activeOffer] = useAppSelector((state) => [state.city, state.activeOffer]);
+  const {cityName, offers, activeOffer} = useAppSelector((state) => state);
 
-  const offerOrUndefined = offerFullList.find((o) => String(o.id) === params.id);
+  const offerOrUndefined = offerFullList.find((o: OfferBase) => String(o.id) === params.id);
   if (offerOrUndefined === undefined) {
     return <Page404NotFound/>;
   }
   const offer = offerOrUndefined;
 
-  const offersNear = getOffersByCity(city).filter((o) => o.id !== offer.id);
-  const markers = getMarkersFromOffers(offersNear);
-  const selectedMarker = activeOffer ? getMarkersFromOffers([activeOffer])[0] : null;
+  const offersNear = getOffersByCityName(offers, cityName).filter((o: OfferBase) => o.id !== offer.id);
 
   function listOfferGallery() {
     return (
@@ -167,7 +166,7 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
             </div>
           </div>
           <section className="offer__map map">
-            <Map city={offer.city} markers={markers} selectedMarker={selectedMarker}/>
+            <Map city={offer.city} offers={offersNear} selectedOffer={activeOffer} />
           </section>
         </section>
         <div className="container">

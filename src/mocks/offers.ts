@@ -1,5 +1,5 @@
 import { OfferType } from '../const';
-import { OfferFull, OfferPreview } from '../types/offer';
+import { OfferFull } from '../types/offer';
 import { User } from '../types/user';
 
 const host: User = {
@@ -16,7 +16,7 @@ export const offerFullList: OfferFull[] = [
     type: OfferType.apartment,
     price: 120,
     city: {
-      title: 'Amsterdam',
+      name: 'Amsterdam',
       location: {
         latitude: 52.38,
         longitude: 4.90,
@@ -62,7 +62,7 @@ export const offerFullList: OfferFull[] = [
     type: OfferType.room,
     price: 80,
     city: {
-      title: 'Amsterdam',
+      name: 'Amsterdam',
       location: {
         latitude: 52.38,
         longitude: 4.90,
@@ -105,7 +105,7 @@ export const offerFullList: OfferFull[] = [
     type: OfferType.apartment,
     price: 132,
     city: {
-      title: 'Amsterdam',
+      name: 'Amsterdam',
       location: {
         latitude: 52.38,
         longitude: 4.90,
@@ -148,7 +148,7 @@ export const offerFullList: OfferFull[] = [
     type: OfferType.apartment,
     price: 180,
     city: {
-      title: 'Amsterdam',
+      name: 'Amsterdam',
       location: {
         latitude: 52.38,
         longitude: 4.90,
@@ -193,7 +193,7 @@ export const offerFullList: OfferFull[] = [
     type: OfferType.room,
     price: 80,
     city: {
-      title: 'Paris',
+      name: 'Paris',
       location: {
         latitude: 52.38,
         longitude: 4.90,
@@ -236,7 +236,7 @@ export const offerFullList: OfferFull[] = [
     type: OfferType.apartment,
     price: 132,
     city: {
-      title: 'Paris',
+      name: 'Paris',
       location: {
         latitude: 52.38,
         longitude: 4.90,
@@ -279,7 +279,7 @@ export const offerFullList: OfferFull[] = [
     type: OfferType.apartment,
     price: 180,
     city: {
-      title: 'Paris',
+      name: 'Paris',
       location: {
         latitude: 52.38,
         longitude: 4.90,
@@ -319,4 +319,4 @@ export const offerFullList: OfferFull[] = [
 ];
 
 
-export const offerPreviewList: OfferPreview[] = offerFullList.map((offerFull) => Object.assign({}, offerFull, {previewImage: offerFull.images[0]}));
+// const offerPreviewList: OfferPreview[] = offerFullList.map((offerFull) => Object.assign({}, offerFull, {previewImage: offerFull.images[0]}));

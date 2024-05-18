@@ -5,7 +5,7 @@ export type Location = {
 }
 
 export type City = {
-  title: string;
+  name: string;
   location: Location;
 }
 

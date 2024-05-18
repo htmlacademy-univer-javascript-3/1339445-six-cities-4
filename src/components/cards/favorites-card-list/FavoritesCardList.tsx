@@ -2,17 +2,27 @@ import { Link } from 'react-router-dom';
 import { OfferPreview } from '../../../types/offer';
 import { OfferCard } from '../offer-card/OfferCard';
 import { CardType } from '../offer-card/const';
-import { offerPreviewList } from '../../../mocks/offers';
 import { City } from '../../../types/map';
 import { ReactNode } from 'react';
 import { groupOffersByCity } from '../../../utils';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { Spinner } from '../../spinner/Spinner';
 
 export function FavoritesCardList() {
-  const favoriteOffers = offerPreviewList.filter((offer) => offer.isFavorite);
+  const {offers, isOffersLoading} = useAppSelector((state) => state);
+
+  if (isOffersLoading) {
+    return (
+      <ul className="favorites__list">
+        <Spinner/>
+      </ul>
+    );
+  }
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const offersByCity = groupOffersByCity(favoriteOffers);
 
-  function locationItems(city: City, offers: OfferPreview[]) {
-    if (offers.length === 0) {
+  function locationItems(city: City, offersList: OfferPreview[]) {
+    if (offersList.length === 0) {
       return null;
     }
     return (
@@ -20,13 +30,13 @@ export function FavoritesCardList() {
         <div className="favorites__locations locations locations--current">
           <div className="locations__item">
             <Link className="locations__item-link" to="#todo">
-              <span>{ city.title }</span>
+              <span>{ city.name }</span>
             </Link>
           </div>
         </div>
         <div className="favorites__places">
           {
-            offers.map((offer) => (
+            offersList.map((offer) => (
               <OfferCard
                 key={offer.id}
                 offer={offer}
@@ -41,8 +51,8 @@ export function FavoritesCardList() {
 
   function renderFavoritesList() {
     const result = new Array<ReactNode>();
-    for (const offers of offersByCity.values()) {
-      result.push(locationItems(offers[0].city, offers));
+    for (const offersList of offersByCity.values()) {
+      result.push(locationItems(offersList[0].city, offersList));
     }
     return result;
   }

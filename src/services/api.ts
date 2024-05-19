@@ -42,8 +42,8 @@ export const createAPI = (): AxiosInstance => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
 
-        // eslint-disable-next-line no-alert
-        alert(`HTTP error ${error.response.status}: ${detailMessage.message}`);
+        // eslint-disable-next-line no-console
+        console.error(`HTTP error ${error.response.status}: ${detailMessage.message}`);
       }
 
       throw error;

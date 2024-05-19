@@ -1,9 +1,12 @@
 import { AuthStatus } from '../../../const';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 import { Review } from '../../../types/review';
 import { ReviewItem } from '../review-item/ReviewItem';
 import { ReviewsForm } from '../reviews-form/ReviewsForm';
 
-export function ReviewsList({reviews, authStatus}: ReviewsListProps) {
+export function ReviewsList({reviews}: ReviewsListProps) {
+  const {authorizationStatus} = useAppSelector((state) => state);
+
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">
@@ -17,7 +20,7 @@ export function ReviewsList({reviews, authStatus}: ReviewsListProps) {
         }
       </ul>
       {
-        authStatus === AuthStatus.auth && (
+        authorizationStatus === AuthStatus.auth && (
           <ReviewsForm />
         )
       }
@@ -27,5 +30,4 @@ export function ReviewsList({reviews, authStatus}: ReviewsListProps) {
 
 type ReviewsListProps = {
   reviews: Review[];
-  authStatus: AuthStatus;
 }

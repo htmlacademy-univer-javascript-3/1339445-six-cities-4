@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { AppRoute, AuthStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { offerFullList } from '../../mocks/offers';
 import { Page404NotFound } from '../page-404-not-found/Page404NotFound';
 import { NearPlacesCardList } from '../../components/cards/near-places-card-list/NearPlacesCardList';
@@ -10,7 +10,7 @@ import { getOffersByCityName } from '../../utils';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { OfferBase } from '../../types/offer';
 
-export function OfferScreen({authStatus} : OfferScreenProps) {
+export function OfferScreen() {
   const params = useParams();
   const {cityName, offers, activeOffer} = useAppSelector((state) => state);
 
@@ -162,7 +162,7 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
                   </p>
                 </div>
               </div>
-              <ReviewsList reviews={reviews} authStatus={authStatus}/>
+              <ReviewsList reviews={reviews}/>
             </div>
           </div>
           <section className="offer__map map">
@@ -180,8 +180,4 @@ export function OfferScreen({authStatus} : OfferScreenProps) {
       </main>
     </div>
   );
-}
-
-type OfferScreenProps = {
-  authStatus: AuthStatus;
 }

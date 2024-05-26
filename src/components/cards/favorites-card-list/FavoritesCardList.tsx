@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
 import { OfferPreview } from '../../../types/offer';
-import { OfferCard } from '../offer-card/OfferCard';
+import OfferCard from '../offer-card/OfferCard';
 import { CardType } from '../offer-card/const';
 import { City } from '../../../types/map';
 import { ReactNode } from 'react';
 import { groupOffersByCity } from '../../../utils';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { Spinner } from '../../spinner/Spinner';
+import { getFavoriteOffers, getIsOffersLoading } from '../../../store/offers-process/selectors';
 
 export function FavoritesCardList() {
-  const {offers, isOffersLoading} = useAppSelector((state) => state);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
 
   if (isOffersLoading) {
     return (
@@ -18,7 +19,9 @@ export function FavoritesCardList() {
       </ul>
     );
   }
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
   const offersByCity = groupOffersByCity(favoriteOffers);
 
   function locationItems(city: City, offersList: OfferPreview[]) {

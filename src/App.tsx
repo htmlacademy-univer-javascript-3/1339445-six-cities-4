@@ -25,6 +25,5 @@ export function App() {
         <Route path='*' element={<Page404NotFound />} />
       </Routes>
     </BrowserRouter>
-
   );
 }

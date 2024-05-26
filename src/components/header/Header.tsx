@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
 import { logout } from '../../store/api-actions';
+import { getIsAuth, getUserEmail } from '../../store/auth-process/selectors';
+import { getFavoriteOffers } from '../../store/offers-process/selectors';
 
 export function Header() {
   const dispatch = useAppDispatch();
-  const [
-    authorizationStatus, userData, offers
-  ] = useAppSelector((state) => [
-    state.authorizationStatus, state.userData, state.offers
-  ]);
+
+  const isAuth = useAppSelector(getIsAuth);
+  const userEmail = useAppSelector(getUserEmail);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   return (
     <header className="header">
@@ -29,7 +30,7 @@ export function Header() {
           <nav className="header__nav">
             <ul className="header__nav-list">
               {
-                authorizationStatus === AuthStatus.auth ? (
+                isAuth ? (
                   <>
                     <li className="header__nav-item user">
                       <Link
@@ -38,9 +39,9 @@ export function Header() {
                       >
                         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                         <span className="header__user-name user__name">
-                          { userData?.email || 'unknown email'}
+                          { userEmail || 'unknown email'}
                         </span>
-                        <span className="header__favorite-count">{offers.filter((offer) => offer.isFavorite).length}</span>
+                        <span className="header__favorite-count">{favoriteOffers.length}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">

@@ -2,9 +2,10 @@ import { CitiesCardList } from '../../components/cards/cities-card-list/CitiesCa
 import { Header } from '../../components/header/Header';
 import { LocationRows } from '../../components/locations-row/LocationsRow';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { getOffers } from '../../store/offers-process/selectors';
 
 export function MainScreen() {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   return (
     <div className="page page--gray page--main">

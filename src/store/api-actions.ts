@@ -124,3 +124,23 @@ export const uploadComment = createAsyncThunk<
     await api.post(APIRoute.comments(offerId), comment);
   }
 );
+
+export const changeFavoriteStatus = createAsyncThunk<
+  OfferPreview,
+  {
+    offerId: OfferBase['id'];
+    isFavorite: boolean;
+  },
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  'data/changeFavoriteStatus',
+  async ({offerId, isFavorite}, {extra: api}) => {
+    const newStatus = Number(isFavorite);
+    const {data} = await api.post<OfferPreview>(APIRoute.favoriteStatus(offerId, newStatus));
+    return data;
+  }
+);

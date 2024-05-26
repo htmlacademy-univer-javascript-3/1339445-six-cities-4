@@ -1,7 +1,11 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { starsData } from './const';
+import { useAppDispatch } from '../../../hooks/useAppSelector';
+import { uploadComment } from '../../../store/api-actions';
+import { OfferBase } from '../../../types/offer';
 
-export function ReviewsForm() {
+export function ReviewsForm({offerId}: ReviewsFormProps) {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     rating: -1,
     review: '',
@@ -12,10 +16,18 @@ export function ReviewsForm() {
       return;
     }
     const {name, value} = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    if (name === 'rating') {
+      setFormData({
+        ...formData,
+        [name]: Number(value),
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+
   }
 
   function isFormValid(): boolean {
@@ -24,10 +36,44 @@ export function ReviewsForm() {
       return false;
     }
     if (formData.review.length < 50 || formData.review.length > 300) {
-      // 'Your review must contain from 50 to 300 caracters'
+      // 'Your comment must contain from 50 to 300 caracters'
       return false;
     }
     return true;
+  }
+
+  function handleSubmitForm(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!isFormValid()) {
+      // eslint-disable-next-line no-alert
+      alert('Incorrect form data');
+      return;
+    }
+    const reviewToUpload = {
+      rating: formData.rating,
+      comment: formData.review
+    };
+    dispatch(uploadComment({offerId, comment: reviewToUpload}))
+      .then((action) => {
+        if (uploadComment.fulfilled.match(action)) {
+          setFormData({
+            rating: -1,
+            review: '',
+          });
+          // eslint-disable-next-line no-alert
+          alert('Review uploaded!');
+        } else {
+          // eslint-disable-next-line no-alert
+          alert('Error occured. Review was not uploaded.');
+        }
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+        // eslint-disable-next-line no-alert
+        alert('Error occured. Review was not uploaded.');
+      });
   }
 
   function drawStars() {
@@ -56,7 +102,7 @@ export function ReviewsForm() {
   }
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmitForm}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -88,4 +134,8 @@ export function ReviewsForm() {
       </div>
     </form>
   );
+}
+
+type ReviewsFormProps = {
+  offerId: OfferBase['id'];
 }

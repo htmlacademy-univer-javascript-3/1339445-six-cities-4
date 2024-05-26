@@ -9,7 +9,17 @@ import { SortBy, sortingFunc } from '../../sorting-variants/const';
 import { Spinner } from '../../spinner/Spinner';
 
 export function CitiesCardList() {
-  const {cityName, offers, activeOffer, isOffersLoading} = useAppSelector((state) => state);
+  const [
+    cityName,
+    offers,
+    activeOffer,
+    isOffersLoading
+  ] = useAppSelector((state) => [
+    state.cityName,
+    state.offers,
+    state.activeOffer,
+    state.isOffersLoading,
+  ]);
   const [sorting, setSorting] = useState(SortBy.Popular);
 
   if (isOffersLoading) {

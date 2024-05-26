@@ -6,7 +6,7 @@ import { login } from '../../store/api-actions';
 import { validatePassword } from './utils';
 
 export function LoginScreen() {
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useAppDispatch();
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);

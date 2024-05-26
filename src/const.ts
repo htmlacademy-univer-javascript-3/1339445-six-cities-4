@@ -43,4 +43,16 @@ export const APIRoute = {
   logout: () => '/logout',
 };
 
-export const cityNames = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const cityNames = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf'
+];
+
+export enum NameSpace {
+  Auth = 'auth',
+  Offers = 'offers',
+}

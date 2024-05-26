@@ -1,4 +1,4 @@
-import { OfferCard } from '../offer-card/OfferCard';
+import OfferCard from '../offer-card/OfferCard';
 import { CardType } from '../offer-card/const';
 import { getOffersByCityName } from '../../../utils';
 import { Map } from '../../map/Map';
@@ -7,19 +7,14 @@ import { SortingVariants } from '../../sorting-variants/SortingVariants';
 import { useState } from 'react';
 import { SortBy, sortingFunc } from '../../sorting-variants/const';
 import { Spinner } from '../../spinner/Spinner';
+import { getActiveOffer, getCityName, getIsOffersLoading, getOffers } from '../../../store/offers-process/selectors';
 
 export function CitiesCardList() {
-  const [
-    cityName,
-    offers,
-    activeOffer,
-    isOffersLoading
-  ] = useAppSelector((state) => [
-    state.cityName,
-    state.offers,
-    state.activeOffer,
-    state.isOffersLoading,
-  ]);
+  const cityName = useAppSelector(getCityName);
+  const offers = useAppSelector(getOffers);
+  const activeOffer = useAppSelector(getActiveOffer);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
+
   const [sorting, setSorting] = useState(SortBy.Popular);
 
   if (isOffersLoading) {
@@ -61,7 +56,6 @@ export function CitiesCardList() {
 
   const city = currentOffers[0].city;
   const sortedOffers = sortingFunc.get(sorting)!(currentOffers);
-
 
   return (
     <div className="cities">

@@ -10,11 +10,14 @@ import { useEffect, useState } from 'react';
 import { OfferFull, OfferPreview } from '../../types/offer';
 import { Review } from '../../types/review';
 import { Spinner } from '../../components/spinner/Spinner';
+import { getActiveOffer } from '../../store/offers-process/selectors';
 
 export function OfferScreen() {
   const params = useParams();
+
   const dispatch = useAppDispatch();
-  const {activeOffer} = useAppSelector((state) => state);
+
+  const activeOffer = useAppSelector(getActiveOffer);
 
   // undefined - ждём загрузки. null - ошибка запроса (не найдено)
   const [offer, setOffer] = useState<OfferFull | null | undefined>(undefined);

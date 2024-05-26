@@ -1,17 +1,20 @@
 import { Link, Navigate } from 'react-router-dom';
-import { AppRoute, AuthStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
 import { FormEvent, useRef } from 'react';
 import { login } from '../../store/api-actions';
 import { validatePassword } from './utils';
+import { getIsAuth } from '../../store/auth-process/selectors';
 
 export function LoginScreen() {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useAppDispatch();
+
+  const isAuth = useAppSelector(getIsAuth);
+
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  if (authorizationStatus !== AuthStatus.noAuth) {
+  if (isAuth) {
     return <Navigate to={AppRoute.root}/>;
   }
 

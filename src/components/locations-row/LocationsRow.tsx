@@ -1,10 +1,11 @@
 import { cityNames } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
-import { changeCityName } from '../../store/action';
+import { changeCityName } from '../../store/offers-process/offers-process';
+import { getCityName } from '../../store/offers-process/selectors';
 import { City } from '../../types/map';
 
 export function LocationRows() {
-  const activeCityName = useAppSelector((state) => state.cityName);
+  const activeCityName = useAppSelector(getCityName);
   const dispatch = useAppDispatch();
 
   function createLocationItem(cityName: City['name']) {

@@ -3,9 +3,10 @@ import { OfferPreview } from '../../../types/offer';
 import { CardType, cardParametersMap } from './const';
 import { getOfferLink } from './utils';
 import { useAppDispatch } from '../../../hooks/useAppSelector';
-import { changeActiveOffer } from '../../../store/action';
+import { changeActiveOffer } from '../../../store/offers-process/offers-process';
+import { memo } from 'react';
 
-export function OfferCard({offer, cardType}: OfferCardProps) {
+function OfferCard({offer, cardType}: OfferCardProps) {
   const dispatch = useAppDispatch();
 
   const params = cardParametersMap[cardType];
@@ -76,3 +77,4 @@ type OfferCardProps = {
   cardType: CardType;
 }
 
+export default memo(OfferCard);

@@ -2,12 +2,15 @@ import { Link } from 'react-router-dom';
 import { OfferPreview } from '../../../types/offer';
 import { CardType, cardParametersMap } from './const';
 import { getOfferLink } from './utils';
-import { useAppDispatch } from '../../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useAppSelector';
 import { changeActiveOffer } from '../../../store/offers-process/offers-process';
 import { memo } from 'react';
+import { getIsAuth } from '../../../store/auth-process/selectors';
+import { changeFavoriteStatus } from '../../../store/api-actions';
 
 function OfferCard({offer, cardType}: OfferCardProps) {
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getIsAuth);
 
   const params = cardParametersMap[cardType];
 
@@ -41,23 +44,30 @@ function OfferCard({offer, cardType}: OfferCardProps) {
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
+          {isAuth && (
+            <button
+              className={`place-card__bookmark-button${offer.isFavorite && ' place-card__bookmark-button--active'} button`}
+              type="button"
+              onClick={() => {
+                const newStatus = !offer.isFavorite;
+                dispatch(changeFavoriteStatus({offerId: offer.id, isFavorite: newStatus}));
+              }}
             >
-              { offer.isFavorite && <use xlinkHref="#icon-bookmark" /> }
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+              <svg
+                className="place-card__bookmark-icon"
+                width={18}
+                height={19}
+              >
+                <use xlinkHref="#icon-bookmark" />
+              </svg>
+              <span className="visually-hidden">To bookmarks</span>
+            </button>
+          )}
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating / 5 * 100}%` }} />
+            <span style={{ width: `${Math.round(offer.rating) / 5 * 100}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

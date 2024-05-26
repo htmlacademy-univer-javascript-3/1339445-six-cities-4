@@ -7,21 +7,31 @@ import { ReactNode } from 'react';
 import { groupOffersByCity } from '../../../utils';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { Spinner } from '../../spinner/Spinner';
-import { getFavoriteOffers, getIsOffersLoading } from '../../../store/offers-process/selectors';
+import { getIsOffersLoading } from '../../../store/offers-process/selectors';
 
-export function FavoritesCardList() {
+export function FavoritesCardList({favoriteOffers}: FavoritesCardListProps) {
   const isOffersLoading = useAppSelector(getIsOffersLoading);
 
   if (isOffersLoading) {
     return (
-      <ul className="favorites__list">
+      <section className="favorites">
+        <h1 className="favorites__title">Saved listing</h1>
         <Spinner/>
-      </ul>
+      </section>
     );
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  if (favoriteOffers.length === 0) {
+    return (
+      <section className="favorites favorites--empty">
+        <h1 className="visually-hidden">Favorites (empty)</h1>
+        <div className="favorites__status-wrapper">
+          <b className="favorites__status">Nothing yet saved.</b>
+          <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+        </div>
+      </section>
+    );
+  }
   const offersByCity = groupOffersByCity(favoriteOffers);
 
   function locationItems(city: City, offersList: OfferPreview[]) {
@@ -29,7 +39,7 @@ export function FavoritesCardList() {
       return null;
     }
     return (
-      <li className="favorites__locations-items">
+      <li className="favorites__locations-items" key={city.name}>
         <div className="favorites__locations locations locations--current">
           <div className="locations__item">
             <Link className="locations__item-link" to="#todo">
@@ -61,10 +71,16 @@ export function FavoritesCardList() {
   }
 
   return (
-    <ul className="favorites__list">
-      {
-        renderFavoritesList()
-      }
-    </ul>
+    <section className="favorites">
+      <h1 className="favorites__title">Saved listing</h1>
+      <ul className="favorites__list">
+        { renderFavoritesList() }
+      </ul>
+    </section>
   );
+}
+
+
+type FavoritesCardListProps = {
+  favoriteOffers: OfferPreview[];
 }

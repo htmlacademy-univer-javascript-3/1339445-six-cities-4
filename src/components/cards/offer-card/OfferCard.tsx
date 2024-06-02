@@ -46,7 +46,7 @@ function OfferCard({offer, cardType}: OfferCardProps) {
           </div>
           {isAuth && (
             <button
-              className={`place-card__bookmark-button${offer.isFavorite && ' place-card__bookmark-button--active'} button`}
+              className={`place-card__bookmark-button${offer.isFavorite ? ' place-card__bookmark-button--active' : ''} button`}
               type="button"
               onClick={() => {
                 const newStatus = !offer.isFavorite;

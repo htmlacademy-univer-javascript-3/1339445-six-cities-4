@@ -67,8 +67,9 @@ export function OfferScreen() {
     if (comments === null) {
       return <div>Comments not found</div>;
     }
+    const commentsToShow = comments.toReversed().slice(0, 10);
     return (
-      <ReviewsList reviews={comments} offerId={offerId!}/>
+      <ReviewsList reviews={commentsToShow} offerId={offerId!}/>
     );
   }
 

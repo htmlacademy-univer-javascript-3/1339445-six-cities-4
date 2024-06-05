@@ -1,17 +1,21 @@
+import { useSearchParams } from 'react-router-dom';
 import { cityNames } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
-import { changeCityName } from '../../store/offers-process/offers-process';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import { getCityName } from '../../store/offers-process/selectors';
 import { City } from '../../types/map';
 
 export function LocationRows() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setSearch] = useSearchParams();
   const activeCityName = useAppSelector(getCityName);
-  const dispatch = useAppDispatch();
 
   function createLocationItem(cityName: City['name']) {
     let buttonClassName = 'locations__item-link tabs__item';
     let buttonOnClick = () => {
-      dispatch(changeCityName(cityName));
+      setSearch((prev) => ({
+        ...prev,
+        city: cityName,
+      }));
     };
 
     if (cityName === activeCityName) {

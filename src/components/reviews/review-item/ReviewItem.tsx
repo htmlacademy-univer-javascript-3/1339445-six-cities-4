@@ -1,7 +1,10 @@
 import { Review } from '../../../types/review';
+import { dateHumanReadable } from '../../../utils';
 
 
 export function ReviewItem({review}: ReviewItemProps) {
+  const date = new Date(review.date);
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -26,8 +29,8 @@ export function ReviewItem({review}: ReviewItemProps) {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">
-          {review.date}
+        <time className="reviews__time" dateTime={`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`}>
+          { dateHumanReadable(date) }
         </time>
       </div>
     </li>

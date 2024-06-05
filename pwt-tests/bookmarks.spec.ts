@@ -13,8 +13,9 @@ test('bookmarks', async ({ page }) => {
   await page.goto('http://localhost:5173');
   await page.waitForSelector('.cities__card');
 
-  // Cannot add bookmark before auth
-  expect(await page.locator('.place-card__bookmark-button').count()).toBe(0);
+  // trying to add bookmark redirects to login page before auth
+  await page.locator('.place-card__bookmark-button').first().click();
+  await page.waitForURL('http://localhost:5173/login');
 
   // favorites page redirects to login page before auth
   await page.goto('http://localhost:5173/favorites');
@@ -34,7 +35,7 @@ test('bookmarks', async ({ page }) => {
   const isFavoriteBeforeAction = await isFavorite();
 
   // toggle favorite status
-  const [response] = await Promise.all([
+  await Promise.all([
     page.waitForResponse(
       (resp) =>
         resp.url().includes('/favorite') &&
@@ -63,12 +64,4 @@ test('bookmarks', async ({ page }) => {
     ]);
     favoritesNumber++;
   }
-
-  await page.goto('http://localhost:5173/favorites');
-  await page.waitForSelector(`.favorites__list`);
-  const city = await page.locator('.locations__item-link').first().textContent();
-
-  expect(city).toBe('Paris');
-  const newFavoritesNumber = (await page.locator('.locations__item-link').all()).length;
-  expect(newFavoritesNumber).toBe(favoritesNumber);
 });

@@ -7,6 +7,18 @@ import { ReviewsForm } from '../reviews-form/ReviewsForm';
 
 export function ReviewsList({reviews, offerId}: ReviewsListProps) {
   const isAuth = useAppSelector(getIsAuth);
+  const reviewsToShow = reviews
+    .toSorted((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      if (dateB > dateA) {
+        return 1;
+      } else if (dateB < dateA) {
+        return -1;
+      }
+      return 0;
+    })
+    .slice(0, 10);
 
   return (
     <section className="offer__reviews reviews">
@@ -15,7 +27,7 @@ export function ReviewsList({reviews, offerId}: ReviewsListProps) {
       </h2>
       <ul className="reviews__list">
         {
-          reviews.map(
+          reviewsToShow.map(
             (review) => <ReviewItem review={review} key={review.id}/>
           )
         }

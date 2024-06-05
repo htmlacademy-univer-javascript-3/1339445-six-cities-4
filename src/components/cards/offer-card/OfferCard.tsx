@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { OfferPreview } from '../../../types/offer';
 import { CardType, cardParametersMap } from './const';
 import { getOfferLink } from './utils';
@@ -7,8 +7,10 @@ import { changeActiveOffer } from '../../../store/offers-process/offers-process'
 import { memo } from 'react';
 import { getIsAuth } from '../../../store/auth-process/selectors';
 import { changeFavoriteStatus } from '../../../store/api-actions';
+import { AppRoute } from '../../../const';
 
 function OfferCard({offer, cardType}: OfferCardProps) {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(getIsAuth);
 
@@ -44,26 +46,27 @@ function OfferCard({offer, cardType}: OfferCardProps) {
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          {isAuth && (
-            <button
-              className={`place-card__bookmark-button${offer.isFavorite ? ' place-card__bookmark-button--active' : ''} button`}
-              type="button"
-              onClick={() => {
+          <button
+            className={`place-card__bookmark-button${offer.isFavorite ? ' place-card__bookmark-button--active' : ''} button`}
+            type="button"
+            onClick={() => {
+              if (isAuth) {
                 const newStatus = !offer.isFavorite;
                 dispatch(changeFavoriteStatus({offerId: offer.id, isFavorite: newStatus}));
-              }}
+              } else {
+                navigate(AppRoute.login);
+              }
+            }}
+          >
+            <svg
+              className="place-card__bookmark-icon"
+              width={18}
+              height={19}
             >
-              <svg
-                className="place-card__bookmark-icon"
-                width={18}
-                height={19}
-              >
-                <use xlinkHref="#icon-bookmark" />
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
-          )}
-
+              <use xlinkHref="#icon-bookmark" />
+            </svg>
+            <span className="visually-hidden">To bookmarks</span>
+          </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

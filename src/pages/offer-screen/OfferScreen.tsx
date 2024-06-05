@@ -1,23 +1,27 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Page404NotFound } from '../page-404-not-found/Page404NotFound';
 import { NearPlacesCardList } from '../../components/cards/near-places-card-list/NearPlacesCardList';
 import { ReviewsList } from '../../components/reviews/reviews-list/ReviewsList';
 import { Map } from '../../components/map/Map';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
-import { fetchComments, fetchOffer, fetchOffersNearby } from '../../store/api-actions';
+import { changeFavoriteStatus, fetchComments, fetchOffer, fetchOffersNearby } from '../../store/api-actions';
 import { Header } from '../../components/header/Header';
 import { useEffect, useState } from 'react';
-import { OfferFull, OfferPreview } from '../../types/offer';
+import { OfferBase, OfferFull, OfferPreview } from '../../types/offer';
 import { Review } from '../../types/review';
 import { Spinner } from '../../components/spinner/Spinner';
 import { getActiveOffer } from '../../store/offers-process/selectors';
+import { getIsAuth } from '../../store/auth-process/selectors';
+import { AppRoute } from '../../const';
 
 export function OfferScreen() {
   const params = useParams();
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const activeOffer = useAppSelector(getActiveOffer);
+  const isAuth = useAppSelector(getIsAuth);
 
   // undefined - ждём загрузки. null - ошибка запроса (не найдено)
   const [offer, setOffer] = useState<OfferFull | null | undefined>(undefined);
@@ -67,9 +71,8 @@ export function OfferScreen() {
     if (comments === null) {
       return <div>Comments not found</div>;
     }
-    const commentsToShow = comments.toReversed().slice(0, 10);
     return (
-      <ReviewsList reviews={commentsToShow} offerId={offerId!}/>
+      <ReviewsList reviews={comments} offerId={offerId!}/>
     );
   }
 
@@ -88,9 +91,10 @@ export function OfferScreen() {
       if (offersNearby === null) {
         return null;
       }
+      const markers = Array<OfferBase>(...offersNearby.slice(0, 3), offer!);
       return (
         <section className="offer__map map">
-          <Map city={offer!.city} offers={offersNearby} selectedOffer={activeOffer} />
+          <Map city={offer!.city} offers={markers} selectedOffer={activeOffer} />
         </section>
       );
     }
@@ -125,16 +129,31 @@ export function OfferScreen() {
               <h1 className="offer__name">
                 {offer.title}
               </h1>
-              <button className="offer__bookmark-button button" type="button">
+              <button
+                className={`offer__bookmark-button${offer.isFavorite ? ' offer__bookmark-button--active' : ''} button`}
+                type="button"
+                onClick={() => {
+                  if (isAuth) {
+                    const newStatus = !offer.isFavorite;
+                    dispatch(changeFavoriteStatus({offerId: offer.id, isFavorite: newStatus}));
+                    setOffer({
+                      ...offer,
+                      isFavorite: newStatus,
+                    });
+                  } else {
+                    navigate(AppRoute.login);
+                  }
+                }}
+              >
                 <svg className="offer__bookmark-icon" width={31} height={33}>
-                  { offer.isFavorite && <use xlinkHref="#icon-bookmark" /> }
+                  <use xlinkHref="#icon-bookmark" />
                 </svg>
                 <span className="visually-hidden">To bookmarks</span>
               </button>
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
-                <span style={{ width: `${offer.rating / 5 * 100}%` }} />
+                <span style={{ width: `${Math.round(offer.rating) / 5 * 100}%` }} />
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="offer__rating-value rating__value">{offer.rating}</span>
@@ -199,7 +218,7 @@ export function OfferScreen() {
       if (offersNearby === null) {
         return <div>Cannot load offers nearby</div>;
       }
-      return <NearPlacesCardList offers={offersNearby}/>;
+      return <NearPlacesCardList offers={offersNearby.slice(0, 3)}/>;
     }
 
     return (

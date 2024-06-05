@@ -32,3 +32,14 @@ export function groupOffersByCity(offers: OfferPreview[]) {
 
   return offersByCity;
 }
+
+export function dateHumanReadable(date: Date) {
+  /** "{month} {year}"*/
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${month} ${year}`;
+}

@@ -1,5 +1,5 @@
 import { Link, Navigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, cityNames } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
 import { FormEvent, useRef } from 'react';
 import { login } from '../../store/api-actions';
@@ -30,6 +30,25 @@ export function LoginScreen() {
       alert('Некорректный email или пароль. Проверьте данные');
     }
   };
+
+  function renderRandomCityHop() {
+    const cityName = cityNames[Math.floor(Math.random() * cityNames.length)]; // random city
+    return (
+      <section className="locations locations--login locations--current">
+        <div className="locations__item">
+          <Link
+            className="locations__item-link"
+            to={{
+              pathname: AppRoute.root,
+              search: `?city=${cityName}`
+            }}
+          >
+            <span>{cityName}</span>
+          </Link>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div className="page page--gray page--login">
@@ -82,13 +101,7 @@ export function LoginScreen() {
               </button>
             </form>
           </section>
-          {/* <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <Link className="locations__item-link" to="#todo">
-                <span>Amsterdam</span>
-              </Link>
-            </div>
-          </section> */}
+          { renderRandomCityHop() }
         </div>
       </main>
     </div>

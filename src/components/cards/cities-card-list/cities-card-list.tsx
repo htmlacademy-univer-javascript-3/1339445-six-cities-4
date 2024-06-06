@@ -1,12 +1,12 @@
-import OfferCard from '../offer-card/OfferCard';
+import OfferCard from '../offer-card/offer-card';
 import { CardType } from '../offer-card/const';
 import { getOffersByCityName } from '../../../utils';
-import { Map } from '../../map/Map';
-import { useAppSelector } from '../../../hooks/useAppSelector';
-import { SortingVariants } from '../../sorting-variants/SortingVariants';
+import { Map } from '../../map/map';
+import { useAppSelector } from '../../../hooks/use-app-selector';
+import { SortingVariants } from '../../sorting-variants/sorting-variants';
 import { useState } from 'react';
 import { SortBy, sortingFunc } from '../../sorting-variants/const';
-import { Spinner } from '../../spinner/Spinner';
+import { Spinner } from '../../spinner/spinner';
 import { getActiveOffer, getCityName, getIsOffersLoading, getOffers } from '../../../store/offers-process/selectors';
 
 export function CitiesCardList() {

@@ -10,7 +10,7 @@ export function SortingVariants({sorting, setSorting}: SortingVariantsProps) {
       result.push(
         <li
           key={sortBy}
-          className={`places__option${sortBy === sorting && ' places__option--active'}`}
+          className={`places__option${sortBy === sorting ? ' places__option--active' : ''}`}
           style={{userSelect: 'none'}}
           tabIndex={0}
           onClick={() => {

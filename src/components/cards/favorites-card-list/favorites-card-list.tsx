@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { OfferPreview } from '../../../types/offer';
-import OfferCard from '../offer-card/OfferCard';
+import OfferCard from '../offer-card/offer-card';
 import { CardType } from '../offer-card/const';
 import { City } from '../../../types/map';
 import { ReactNode } from 'react';
 import { groupOffersByCity } from '../../../utils';
-import { useAppSelector } from '../../../hooks/useAppSelector';
-import { Spinner } from '../../spinner/Spinner';
+import { useAppSelector } from '../../../hooks/use-app-selector';
+import { Spinner } from '../../spinner/spinner';
 import { getIsOffersLoading } from '../../../store/offers-process/selectors';
 
 export function FavoritesCardList({favoriteOffers}: FavoritesCardListProps) {

@@ -1,6 +1,6 @@
 import { Link, Navigate } from 'react-router-dom';
 import { AppRoute, cityNames } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { FormEvent, useRef } from 'react';
 import { login } from '../../store/api-actions';
 import { validatePassword } from './utils';

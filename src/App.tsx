@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { MainScreen } from './pages/main-screen/MainScreen';
-import { LoginScreen } from './pages/login-screen/LoginScreen';
-import { FavoritesScreen } from './pages/favorites-screen/FavoritesScreen';
+import { MainScreen } from './pages/main-screen/main-screen';
+import { LoginScreen } from './pages/login-screen/login-screen';
+import { FavoritesScreen } from './pages/favorites-screen/favorites-screen';
 import { AppRoute } from './const';
-import { OfferScreen } from './pages/offer-screen/OfferScreen';
-import { Page404NotFound } from './pages/page-404-not-found/Page404NotFound';
-import { PrivateRoute } from './components/private-route/PrivateRoute';
+import { OfferScreen } from './pages/offer-screen/offer-screen';
+import { Page404NotFound } from './pages/page-404-not-found/page-404-not-found';
+import { PrivateRoute } from './components/private-route/private-route';
 
 export function App() {
   return (

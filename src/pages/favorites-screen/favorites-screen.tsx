@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { FavoritesCardList } from '../../components/cards/favorites-card-list/FavoritesCardList';
-import { Header } from '../../components/header/Header';
+import { FavoritesCardList } from '../../components/cards/favorites-card-list/favorites-card-list';
+import { Header } from '../../components/header/header';
 import { useEffect, useState } from 'react';
 import { OfferPreview } from '../../types/offer';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { fetchFavoriteOffers } from '../../store/api-actions';
 import { getOffers } from '../../store/offers-process/selectors';
 

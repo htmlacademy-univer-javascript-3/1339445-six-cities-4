@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { cityNames } from '../../const';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getCityName } from '../../store/offers-process/selectors';
 import { City } from '../../types/map';
 

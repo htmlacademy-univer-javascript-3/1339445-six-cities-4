@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Header } from '../../components/header/Header';
+import { Header } from '../../components/header/header';
 
 export function Page404NotFound() {
   return (

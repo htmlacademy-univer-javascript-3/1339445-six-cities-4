@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { OfferPreview } from '../../../types/offer';
 import { CardType, cardParametersMap } from './const';
 import { getOfferLink } from './utils';
-import { useAppDispatch, useAppSelector } from '../../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../../hooks/use-app-selector';
 import { changeActiveOffer } from '../../../store/offers-process/offers-process';
 import { memo } from 'react';
 import { getIsAuth } from '../../../store/auth-process/selectors';

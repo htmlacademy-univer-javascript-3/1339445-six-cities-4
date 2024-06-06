@@ -1,12 +1,12 @@
 import { useSearchParams } from 'react-router-dom';
-import { CitiesCardList } from '../../components/cards/cities-card-list/CitiesCardList';
-import { Header } from '../../components/header/Header';
-import { LocationRows } from '../../components/locations-row/LocationsRow';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { CitiesCardList } from '../../components/cards/cities-card-list/cities-card-list';
+import { Header } from '../../components/header/header';
+import { LocationRows } from '../../components/locations-row/locations-row';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { getOffers } from '../../store/offers-process/selectors';
 import { changeCityName } from '../../store/offers-process/offers-process';
 import { cityNames } from '../../const';
-import { Page404NotFound } from '../page-404-not-found/Page404NotFound';
+import { Page404NotFound } from '../page-404-not-found/page-404-not-found';
 
 export function MainScreen() {
   const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ export function MainScreen() {
   return (
     <div className="page page--gray page--main">
       <Header/>
-      <main className={`page__main page__main--index${offers.length === 0 && ' page__main--index-empty'}`}>
+      <main className={`page__main page__main--index${offers.length === 0 ? ' page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <LocationRows/>

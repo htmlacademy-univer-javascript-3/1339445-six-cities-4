@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { starsData } from './const';
-import { useAppDispatch } from '../../../hooks/useAppSelector';
+import { useAppDispatch } from '../../../hooks/use-app-selector';
 import { uploadComment } from '../../../store/api-actions';
 import { OfferBase } from '../../../types/offer';
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
 import { logout } from '../../store/api-actions';
 import { getIsAuth, getUserEmail } from '../../store/auth-process/selectors';
 import { getFavoriteOffers } from '../../store/offers-process/selectors';

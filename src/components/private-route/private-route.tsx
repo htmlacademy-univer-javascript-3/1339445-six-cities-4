@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getIsAuth } from '../../store/auth-process/selectors';
 
 export function PrivateRoute({children}: PrivateRouteProps) {
